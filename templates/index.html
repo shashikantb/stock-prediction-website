@@ -2,24 +2,175 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Borgavakar Stock Trend Predictor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borgavakar Stock Trend Predictor | AI-Powered Market Insights</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4cc9f0;
+            --dark-color: #1a1a2e;
+            --light-color: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            overflow: hidden;
+        }
+        
+        .header-gradient {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+        
+        .btn-gradient {
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            color: white;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.4);
+        }
+        
+        .ticker-input {
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 12px 15px;
+            transition: all 0.3s;
+        }
+        
+        .ticker-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
 </head>
-<body class="bg-light">
+<body>
     <div class="container py-5">
-        <h2 class="text-center mb-4">📈 S.P.Borgavakar Stock Trend Predictor</h2>
-        <div class="card p-4">
-            <form id="stockForm" class="mb-4">
-                <input type="text" id="ticker" class="form-control mb-3" placeholder="Enter stock ticker (e.g. AAPL)" required>
-                <button class="btn btn-primary w-100">Get Prediction</button>
-            </form>
-            <div>
-                <canvas id="stockChart"></canvas>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="glass-card overflow-hidden">
+                    <div class="header-gradient p-4 text-center">
+                        <h1 class="display-5 fw-bold mb-3"><i class="fas fa-chart-line me-2"></i> Borgavakar Stock Trend Predictor</h1>
+                        <p class="mb-0">AI-powered market insights for smarter investment decisions</p>
+                    </div>
+                    
+                    <div class="p-4 p-md-5">
+						<p class="mb-0">Add ".NS" after stock ticker name (e.g. TCS.NS, RELIANCE.NS, TSLA.NS)</p>
+						<p></p>
+                        <form id="stockForm" class="mb-5">
+						
+                            <div class="input-group mb-3">
+                                
+								<span class="input-group-text bg-white"><i class="fas fa-search"></i></span>
+								
+                                <input type="text" id="ticker" class="form-control ticker-input" placeholder="Enter stock ticker (e.g. TCS.NS, RELIANCE.NS, TSLA.NS)" required>
+                                <button class="btn btn-gradient px-4">
+                                    <i class="fas fa-rocket me-2"></i> Predict
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <div class="chart-container mb-4">
+                            <canvas id="stockChart"></canvas>
+                        </div>
+                        
+                        <div id="predictionResult" class="text-center p-4 rounded-3" style="background-color: rgba(67, 97, 238, 0.05);">
+                            <div class="floating">
+                                <i class="fas fa-lightbulb feature-icon"></i>
+                            </div>
+                            <h4 class="mb-3">Ready for Prediction</h4>
+                            <p class="text-muted">Enter a stock ticker symbol above to get AI-powered trend prediction and analysis.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-4 g-4">
+                    <div class="col-md-4">
+                        <div class="glass-card p-4 h-100">
+                            <i class="fas fa-brain feature-icon"></i>
+                            <h5>Advanced AI</h5>
+                            <p class="text-muted">Our machine learning models analyze historical data to predict future trends.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="glass-card p-4 h-100">
+                            <i class="fas fa-bolt feature-icon"></i>
+                            <h5>Real-time Data</h5>
+                            <p class="text-muted">Get the most up-to-date market information for accurate predictions.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="glass-card p-4 h-100">
+                            <i class="fas fa-chart-pie feature-icon"></i>
+                            <h5>Visual Analytics</h5>
+                            <p class="text-muted">Interactive charts help you understand market trends at a glance.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div id="predictionResult" class="mt-4 text-center"></div>
         </div>
     </div>
+
+    <footer class="text-center py-4 text-muted">
+        <p class="mb-1">© 2023 Borgavakar Stock Trend Predictor</p>
+        <p class="small">Disclaimer: Predictions are not financial advice. Invest at your own risk.</p>
+    </footer>
+
     <script src="/static/js/app.js"></script>
+    <script>
+        // Add some subtle animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.glass-card');
+            elements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = `all 0.5s ease ${index * 0.1}s`;
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 100);
+            });
+        });
+    </script>
 </body>
 </html>
